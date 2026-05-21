@@ -10,6 +10,7 @@ import { useTextColorFeature } from '@/features/text-color'
 import { useBgColorFeature } from '@/features/bg-color'
 import { useLetterSpacingFeature } from '@/features/letter-spacing'
 import { useLineHeightFeature } from '@/features/line-height'
+import { useParagraphSpacingFeature } from '@/features/paragraph-spacing'
 import { useOpenSettingsFeature } from '@/features/open-settings'
 import { useContentFeature } from '@/features/content'
 import { useFontFamilyFeature } from '@/features/font-family'
@@ -38,6 +39,7 @@ export function initDefaultPanels() {
   const bgColorFeature = useBgColorFeature()
   const textColorFeature = useTextColorFeature()
   const lineHeightFeature = useLineHeightFeature()
+  const paragraphSpacingFeature = useParagraphSpacingFeature()
   const letterSpacingFeature = useLetterSpacingFeature()
   const paddingFeature = usePaddingFeature()
   const openSettingsFeature = useOpenSettingsFeature()
@@ -56,6 +58,7 @@ export function initDefaultPanels() {
     controlPlugins[speedFeature.id],
     controlPlugins[fontSizeFeature.id],
     controlPlugins[lineHeightFeature.id],
+    controlPlugins[paragraphSpacingFeature.id],
     controlPlugins[letterSpacingFeature.id],
     controlPlugins[fontFamilyFeature.id],
     controlPlugins[paddingFeature.id],

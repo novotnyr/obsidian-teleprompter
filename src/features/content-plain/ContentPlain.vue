@@ -14,3 +14,9 @@ import { toRefs } from 'vue'
 const { contentProcessed } = toRefs(useContentStore())
 const plain = computed(() => removeMd(contentProcessed.value))
 </script>
+
+<style scoped lang="scss">
+.plain-content {
+  white-space: pre-line;
+}
+</style>

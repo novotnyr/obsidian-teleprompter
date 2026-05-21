@@ -8,7 +8,7 @@ const [useProvideContentStore, useDefaultContentStore] = createInjectionState(
     return reactive({
       ...store,
       contentProcessed: computed(() => {
-        let content = unref(store.content)
+        let content = unref(store.content) ?? ''
 
         if (!unref(store.propertiesVisibility) && content.startsWith('---')) {
           content = content.replace(/^---[\s\S]*?---/, '')

@@ -35,6 +35,7 @@ Open Teleprompter window and focus the note you want to read in Obsidian. Telepr
     - [Speed](#speed)
     - [Font size](#font-size)
     - [Line height](#line-height)
+    - [Paragraph spacing](#paragraph-spacing)
     - [Letter spacing](#letter-spacing)
     - [Font family](#font-family)
     - [Padding](#padding)
@@ -311,6 +312,32 @@ Settings:
 Demo:
 
 <img src="./assets/screenshots/features/line-height.gif" />
+
+</details>
+
+### Paragraph spacing
+
+<details>
+  <summary>Set the space between paragraphs</summary>
+
+---
+
+Commands:
+- Increase with step X (ID: control:paragraph-spacing:up)
+- Decrease with step X (ID: control:paragraph-spacing:down)
+- Reset (ID: control:paragraph-spacing:reset)
+
+**step can be configured in the settings*
+
+---
+
+Settings:
+- Label: displayed name (default: "Paragraph spacing")
+- Value: current paragraph spacing (default: 1)
+- Reset value: paragraph spacing that will be applied when you reset it (default: 1)
+- Minimum: lowest possible paragraph spacing (default: 0)
+- Maximum: highest possible paragraph spacing (default: 5)
+- Step: how much the value will increase or decrease at a time (default: 0.1)
 
 </details>
 

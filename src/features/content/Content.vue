@@ -55,9 +55,7 @@ const containerModifiers = computed(() =>
       classes: [...acc.classes, ...(modifier.classes ?? [])],
     }),
     {
-      styles: {
-        display: !content.value ? 'none' : 'block',
-      },
+      styles: {},
       classes: [],
     },
   ),
@@ -92,8 +90,17 @@ const contentModifiers = computed(() =>
 }
 
 .content {
+  --paragraph-spacing: 1em;
+
   transition: none 100ms ease-in-out;
   transition-property: padding, margin;
-  white-space: pre-line;
+  white-space: normal;
+}
+
+.content :deep(p) {
+  margin-top: var(--paragraph-spacing);
+  margin-bottom: var(--paragraph-spacing);
+  margin-block-start: var(--paragraph-spacing);
+  margin-block-end: var(--paragraph-spacing);
 }
 </style>
