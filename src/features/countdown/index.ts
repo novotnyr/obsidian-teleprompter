@@ -15,6 +15,36 @@ export const useCountdownFeature = defineFeature('countdown', (id) => {
   const resetOnPause = ref(false)
 
   const playStore = usePlayFeature().useStore()
+  let countdownRun = 0
+  let isUpdatingFromTimer = false
+
+  function setCountdownValue(nextValue: number) {
+    isUpdatingFromTimer = true
+    value.value = nextValue
+    isUpdatingFromTimer = false
+  }
+
+  function startCountdown() {
+    const initialValue = Math.ceil(value.value)
+    if (!playStore.value || initialValue <= 0) return
+
+    const run = ++countdownRun
+    const endsAt = performance.now() + initialValue * 1000
+
+    function tick() {
+      if (run !== countdownRun || !playStore.value) return
+
+      const remaining = Math.max(
+        0,
+        Math.ceil((endsAt - performance.now()) / 1000),
+      )
+      if (remaining !== value.value) setCountdownValue(remaining)
+
+      if (remaining > 0) setTimeout(tick, 250)
+    }
+
+    setTimeout(tick, 250)
+  }
 
   useCommandFeature().use(id, [
     {
@@ -59,13 +89,22 @@ export const useCountdownFeature = defineFeature('countdown', (id) => {
   watch(
     () => playStore.value,
     (isPlaying) => {
+      countdownRun += 1
       if (!isPlaying && resetOnPause.value) value.value = resetValue.value
+      if (isPlaying) startCountdown()
     },
+    { immediate: true, flush: 'sync' },
   )
 
-  setInterval(() => {
-    if (playStore.value && value.value > 0) value.value -= 1
-  }, 1000)
+  watch(
+    value,
+    (newValue) => {
+      if (!playStore.value || isUpdatingFromTimer) return
+      countdownRun += 1
+      if (newValue > 0) startCountdown()
+    },
+    { flush: 'sync' },
+  )
 
   return {
     useStore: () => ({
